@@ -1,9 +1,21 @@
 import json, pickle
+import numpy as np
 
 __locations = None
 __data_columns = None
 __model = None
 
+
+def get_estimated_price(location, sqft, bhk, bath):
+    try:
+        loc_index = __data_columns.index(location.lower())
+    except:
+        loc_index = -1
+    x = np.zeros(len(__data_columns))
+    x[0], x[1], x[2] = sqft, bath, bhk
+    if loc_index >= 0:
+        x[loc_index] = 1
+    return __model.predict([x])
 
 def get_location_names():
     return __locations
