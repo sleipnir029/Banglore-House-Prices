@@ -48,12 +48,13 @@ function getBathValue() {
     $.get(url,function(data, status) {
         console.log("got response for get_location_names request");
         if(data) {
-            var locations = data.locations;
+            var locations = data.location;
+            console.log(data);
             var uiLocations = document.getElementById("uiLocations");
-            $('#uiLocations options:selected').empty();
+            $('#uiLocations').empty();
             for(var i in locations) {
                 var opt = new Option(locations[i]);
-                $('#uiLocations options:selected').append(opt);
+                $('#uiLocations').append(opt);
             }
         }
     });
